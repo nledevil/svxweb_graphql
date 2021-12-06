@@ -1,0 +1,33 @@
+# OSX
+.DS_Store
+
+# Deps
+/node_modules
+
+# /coverage
+/coverage
+
+# /bin
+/bin
+
+# Misc
+/.vscode
+.env
+.env.local
+.env.prod
+.env.development.local
+.env.test.local
+.env.production.local
+env.json
+env.dev.json
+
+# intellij
+.idea
+*.iml
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+yarn.lock*
+package-lock.json*
