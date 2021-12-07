@@ -7,14 +7,16 @@ const decode = (str) => {
     if (!line.match(/^\s*[;#]/)) {
       // Not a Comment
       const match = line.match(/^\[([^\]]*)\]$|^([^=]+)(=(.*))?$/i);
-      if (match[1] !== undefined) {
-        section = match[1];
-      } else {
-        output.push({
-          headerName: section,
-          settingName: match[2],
-          settingValue: match[4],
-        })
+      if (match !== null) {
+        if (match[1] !== undefined) {
+          section = match[1];
+        } else {
+          output.push({
+            headerName: section,
+            settingName: match[2],
+            settingValue: match[4],
+          })
+        }
       }
     }
   }

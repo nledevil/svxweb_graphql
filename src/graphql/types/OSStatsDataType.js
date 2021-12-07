@@ -3,14 +3,26 @@ import {
   GraphQLObjectType as ObjectType,
   GraphQLFloat as FloatType,
   GraphQLInt as IntType,
+  GraphQLBoolean as BoolType,
+  GraphQLList as List,
 } from 'graphql';
 
+const netType = {
+  iname: { type: StringType },
+  address: { type: StringType },
+  netmask: { type: StringType },
+  family: { type: StringType },
+  mac: { type: StringType },
+  internal: { type: BoolType },
+  cidr: { type: StringType  },
+  scopeid: { type: IntType },
+};
+
 const osType = {
-  ip: { type: StringType },
   hostname: { type: StringType },
   type: { type: StringType },
   arch: { type: StringType },
-  uptime: { type: IntType },
+  uptime: { type: FloatType },
   os: { type: StringType },
 };
 
@@ -21,7 +33,7 @@ const cpuType = {
 };
 
 const memType = {
-  totalMemMb: { type: IntType },
+  totalMemMb: { type: FloatType },
   usedMemMb: { type: FloatType },
   freeMemMb: { type: FloatType },
   usedMemPercentage: { type: FloatType },
@@ -31,6 +43,14 @@ const memType = {
 const procType = {
   totalProcesses: { type: IntType },
 };
+
+const OSStatsNETDataType = new ObjectType({
+  name: 'OSSTatusNETDataType',
+  description: 'NET Stats',
+  fields: {
+    ...netType,
+  }
+});
 
 const OSStatsOSDataType = new ObjectType({ 
   name: 'OSStatsOSDataType',
@@ -68,6 +88,7 @@ export const OSStatsDataType = new ObjectType({
   name: 'OSStatsDataType',
   description: 'OSStatsDataType',
   fields: {
+    net: { type: new List(OSStatsNETDataType) },
     os: { type: OSStatsOSDataType },
     cpu: { type: OSStatsCPUDataType },
     mem: { type: OSStatsMEMDataType },
