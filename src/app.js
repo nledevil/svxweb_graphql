@@ -7,6 +7,7 @@ import schema from './graphql/schema';
 import sql from './data/sql';
 import sqltables from './config/sqltables';
 import { readINIConfig, writeINIConfig } from './data/svxlink';
+import execFunction from './data/utils/exec';
 
 const { svxlinkTable } = sqltables;
 
@@ -43,6 +44,15 @@ app.use(
   async (_, res) => {
     const results = await writeINIConfig();
     res.status(200).json(results);
+  }
+);
+
+app.use(
+  '/execFunction/:function',
+  async (req, res) => {
+    const result = await execFunction(req.params.function);
+    console.info('result:', result);
+    res.status(200).json(result);
   }
 );
 

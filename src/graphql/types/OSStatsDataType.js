@@ -30,6 +30,7 @@ const cpuType = {
   cpuAvg: { type: FloatType },
   cpuCount: { type: IntType },
   cpuModel: { type: StringType },
+  cpuTemp: { type: StringType },
 };
 
 const memType = {
@@ -42,6 +43,11 @@ const memType = {
 
 const procType = {
   totalProcesses: { type: IntType },
+};
+
+const audioType = {
+  inputs: { type: new List(StringType) },
+  outputs: { type: new List(StringType) },
 };
 
 const OSStatsNETDataType = new ObjectType({
@@ -84,6 +90,14 @@ const OSStatsPROCDataType = new ObjectType({
   }
 });
 
+const OSStatsAUDIODataType = new ObjectType({
+  name: 'OSStatsAUDIODataType',
+  description: 'AUDIO Stats',
+  fields: {
+    ...audioType,
+  }
+});
+
 export const OSStatsDataType = new ObjectType({
   name: 'OSStatsDataType',
   description: 'OSStatsDataType',
@@ -93,5 +107,7 @@ export const OSStatsDataType = new ObjectType({
     cpu: { type: OSStatsCPUDataType },
     mem: { type: OSStatsMEMDataType },
     proc: { type: OSStatsPROCDataType },
+    audio: { type: OSStatsAUDIODataType },
+    usb: { type: new List(StringType) },
   },
 });
