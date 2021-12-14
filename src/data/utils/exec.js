@@ -83,16 +83,16 @@ const execFunctions = {
 };
 
 const execFunction = async (functionName) => {
-  const result = await execFunctions[functionName]();
   try {
+    let result = await execFunctions[functionName]();
     if (result.length > 0) {
       return result[0].replace(ansiRegex, '').split(/\r?\n/).filter(v => v !== '');
     }
-  } catch (err) {
+    return result;
+  } catch (error) {
     console.error(`error: ${err}`);
+    return false;
   }
-  
-  return result;
 };
 
 export default execFunction;

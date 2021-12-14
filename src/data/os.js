@@ -40,6 +40,31 @@ const getNetworkInterfaces = () => {
 }
 
 const getOSStats = async () => {
+  // const stats = {
+  //   net: getNetworkInterfaces(),
+  //   os: {
+  //     hostname: os.hostname(),
+  //     type: os.type(),
+  //     arch: os.arch(),
+  //     uptime: os.uptime(),
+  //     os: await os.oos(),
+  //   },
+  //   cpu: {
+  //     cpuAvg: await cpu.usage(),
+  //     cpuCount: cpu.count(),
+  //     cpuModel: cpu.model(),
+  //     cpuTemp: await getCPUTemp(),
+  //   },
+  //   mem: await mem.info(),
+  //   proc: {
+  //     totalProcesses: await proc.totalProcesses(),
+  //   },
+  //   audio: {
+  //     inputs: await getAudioInputs(),
+  //     outputs: await getAudioOutputs(),
+  //   },
+  //   usb: await getLSUSB(),
+  // }
   const stats = {
     net: getNetworkInterfaces(),
     os: {
@@ -60,10 +85,10 @@ const getOSStats = async () => {
       totalProcesses: await proc.totalProcesses(),
     },
     audio: {
-      inputs: await getAudioInputs(),
-      outputs: await getAudioOutputs(),
+      inputs: await getAudioInputs() || [],
+      outputs: await getAudioOutputs() || [],
     },
-    usb: await getLSUSB(),
+    usb: await getLSUSB() || [],
   }
   return stats;
 };
