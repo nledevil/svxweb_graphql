@@ -6,8 +6,10 @@ import {
 // Queries
 import osStatsQuery from './queries/OSStats';
 import svxlinkQueries from './queries/Svxlink';
+import fileQueries from './queries/Files';
 
 // Mutations
+import fileMutations from './mutations/Files';
 import svxlinkMutations from './mutations/Svxlink';
 
 const schema = new Schema({
@@ -16,12 +18,14 @@ const schema = new Schema({
     fields: {
       ...osStatsQuery,
       ...svxlinkQueries,
+      ...fileQueries,
     },
   }),
   mutation: new ObjectType({
     name: 'Mutation',
     fields: {
       ...svxlinkMutations,
+      ...fileMutations,
     },
   }),
 });

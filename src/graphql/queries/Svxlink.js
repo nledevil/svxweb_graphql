@@ -1,9 +1,10 @@
 
 
-import { GraphQLList as List } from 'graphql';
+import { GraphQLList as List, GraphQLString as StringType } from 'graphql';
 import sql from '../../data/sql';
 import sqltables from '../../config/sqltables';
 import { SvxlinkDataType, SvxlinkDataInputType } from '../types/SvxlinkDataType.js';
+import execFunction from '../../data/utils/exec';
 
 const { svxlinkTable } = sqltables;
 
@@ -21,6 +22,18 @@ const svxlinkQueries = {
         throw err;
       }
     } 
+  },
+  getSvxlinkStatus: {
+    type: StringType,
+    args: {},
+    resolve: async () => {
+      try {
+        const isActive = await execFunction("svxlink_status");
+        return isActive ? isActive[0] : '';
+      } catch (err) {
+        throw err;
+      }
+    }
   }
 };
 

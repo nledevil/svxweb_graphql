@@ -47,6 +47,8 @@ const svxlink_start = () => execBatch(["service svxlink start", "systemctl is-ac
   
 const svxlink_stop = () => execBatch(["service svxlink stop", "systemctl is-active svxlink"]);
 
+const svxlink_status = () => execBatch(["systemctl is-active svxlink"]);
+
 // SYSTEM
 const system_reboot = () => execBatch(["shutdown -r now"]);
   
@@ -72,6 +74,7 @@ const execFunctions = {
   svxlink_restart,
   svxlink_start,
   svxlink_stop,
+  svxlink_status,
   system_reboot,
   system_shutdown,
   system_usb,
@@ -90,7 +93,7 @@ const execFunction = async (functionName) => {
     }
     return result;
   } catch (error) {
-    console.error(`error: ${err}`);
+    console.error(`error: ${error}`);
     return false;
   }
 };

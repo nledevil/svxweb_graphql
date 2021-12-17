@@ -1,5 +1,6 @@
 import { networkInterfaces } from 'os';
 import cors from 'cors';
+import compression from 'compression';
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import getOSStats from './data/os';
@@ -12,6 +13,8 @@ import execFunction from './data/utils/exec';
 const { svxlinkTable } = sqltables;
 
 const app = express();
+
+app.use(compression());
 
 app.use('*', cors());
 
